@@ -1,0 +1,3 @@
+*.rdb
+*.pyc
+__pycache__/

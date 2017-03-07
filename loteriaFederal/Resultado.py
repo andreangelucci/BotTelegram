@@ -61,7 +61,7 @@ class Resultado():
         self.valor = ''    
 
     def printar(self):
-        s = "%s premio: %s (%s) - Valor: R$%s\n" % (self.premio, self.resultado, self.nomeBicho, self.valor)
+        s = "%s: %s (%s) R$%s\n" % (self.premio, self.resultado, self.nomeBicho, self.valor)
         return s
 
     def set_resultado(self, pResultado):

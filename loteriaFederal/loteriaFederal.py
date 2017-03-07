@@ -27,7 +27,9 @@ def crawler():
     concurso = resultadoUrl.find(attrs={"class", "title-bar"})    
     classResultado = resultadoUrl.find(attrs={"class":"resultado-loteria"})    
     strConcurso = concurso.h2.span.text
-    strResultados = concurso.h2.span.text+ "\n"
+    strResultados = concurso.h2.span.text+ "\n\n"
+    ganhador = resultadoUrl.find(attrs={"class", "feedback feedback-warning no-margin milli"})
+    strResultados = strResultados+ ganhador.p.text+ "\n\n"    
     for resultados in classResultado.tbody.findAll('tr'):
         objResultado = Resultado()
         objResultado.premio = resultados.contents[1].text

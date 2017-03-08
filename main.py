@@ -3,6 +3,7 @@ import configparser
 import redis
 import sys
 import loteriaFederal.loteriaFederal
+import quina.webCrawlerQuina
 
 from telegram.ext import Updater
 from telegram.ext import Updater, CommandHandler
@@ -36,7 +37,8 @@ def start(bot, update):
     msg += "Seu id eh {0}.\n".format(update.message.chat_id)    
 
     # Commands menu
-    main_menu_keyboard = [[telegram.KeyboardButton('/loteriaFederal')]]
+    main_menu_keyboard = [[telegram.KeyboardButton('/loteriaFederal')],
+                          [telegram.KeyboardButton('/quina')]]
     reply_kb_markup = telegram.ReplyKeyboardMarkup(main_menu_keyboard,
                                                    resize_keyboard=True,
                                                    one_time_keyboard=True)
@@ -51,7 +53,10 @@ def resultadoLoteriaFederal(bot, update):
     bot.send_message(chat_id=update.message.chat_id,
                      text=msg)
 
-
+def resultadoQuina(bot, update):
+    msg = quina.webCrawlerQuina.crawler()
+    bot.send_message(chat_id=update.message.chat_id,
+                     text=msg)
 
 #associa os comandos
 start_handler = CommandHandler('start', start)
@@ -59,3 +64,6 @@ dispatcher.add_handler(start_handler)
 
 loteriaFederal_handler = CommandHandler('loteriaFederal', resultadoLoteriaFederal)
 dispatcher.add_handler(loteriaFederal_handler)
+
+quina_handler = CommandHandler('quina', resultadoQuina)
+dispatcher.add_handler(quina_handler)
